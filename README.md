@@ -7,3 +7,17 @@
 - Created a web app using Flask. 
 
 <img src="animation.gif?raw=true"/>
+
+Clone this repo by running: 
+```
+git clone https://github.com/plamenpasliev/VGG16Cifar10.git
+```
+Install requirements via:
+```
+pip install -r requirements.txt
+```
+Run flask
+```
+flask run
+```
+And explore the page in your browser at http://127.0.0.1:5000/
