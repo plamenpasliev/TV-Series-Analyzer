@@ -48,6 +48,7 @@ def get_ratings(title="Game of Thrones"):
         for item in xml_content["episodes"]:
             list.append(item["imdb_rating"])
         listoflists.append(list)
+        print(listoflists)
 
         # get the ratings of other seasons
         for i in range(2, total_seasons + 1):
@@ -57,6 +58,7 @@ def get_ratings(title="Game of Thrones"):
                 list.append(item["imdb_rating"])
             listoflists.append(list)
 
+        print(listoflists)
         maxlen = 0
         for item in listoflists:
             if len(item) > maxlen:
@@ -68,6 +70,7 @@ def get_ratings(title="Game of Thrones"):
 
         data = np.array(listoflists).transpose()
         np.place(data, data == "N/A", None)
+        print(data)
         data = data.astype(np.float)
         print("Loaded data from omdb")
         np.save("data/{}".format(title.lower()), data)
@@ -114,6 +117,7 @@ def plot_matrix(rating_data, colors, title="Game of Thrones"):
     collabels, rowlabels = get_xy_labels(rating_data)
 
     fig = plt.figure(figsize=(len(collabels), len(rowlabels)))
+
     ax = fig.add_subplot(1, 1, 1)
 
     # plotting table
@@ -132,7 +136,6 @@ def plot_matrix(rating_data, colors, title="Game of Thrones"):
             if cells[i, j].get_text().get_text() == "nan":
                 cells[i, j].set_visible(False)
 
-    fig.suptitle(title, fontsize=50, y=1.08)
     table.set_fontsize(14)
     table.scale(1, 4)
     plt.tight_layout()
@@ -159,10 +162,13 @@ def plot_rating_per_season(data, title):
 
 
 def plot_scattered_ratings_per_season(data, title):
+    seasonlabels, episodelabels = get_xy_labels(data)
+    if len(seasonlabels) == 1:
+        return 1
+
     fig = plt.figure(figsize=(10, 5))
     ax = fig.add_subplot(1, 1, 1)
 
-    seasonlabels, episodelabels = get_xy_labels(data)
     results = []
     for i in range(len(seasonlabels)):
         for j in range(len(data)):
