@@ -10,13 +10,13 @@
 
 Clone this repo by running: 
 ```
-git clone https://github.com/plamenpasliev/VGG16Cifar10.git
+git clone https://github.com/plamenpasliev/TV-Series-Analyzer.git
 ```
 Install requirements via:
 ```
 pip install -r requirements.txt
 ```
-Run flask
+Run flask by typing:
 ```
 flask run
 ```
